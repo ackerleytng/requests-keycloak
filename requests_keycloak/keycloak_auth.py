@@ -70,8 +70,6 @@ class KeycloakAuth(AuthBase):
         if not post_url:
             raise Exception("TODO")
 
-        print(response.request)
-
         if self._thread_local.pos is not None:
             # Rewind the file position indicator of the body to where
             # it was to resend the request.
