@@ -1,6 +1,6 @@
-from autologin import AutoLoginSession
+from requests_keycloak import KeycloakSession
 
 
-with AutoLoginSession() as s:
+with KeycloakSession() as s:
     r = s.get("https://httpbin.localhost/get", verify=False)
     print(r.text)
