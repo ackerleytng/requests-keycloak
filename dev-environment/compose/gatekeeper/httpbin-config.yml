@@ -1,0 +1,33 @@
+client-id: httpbin
+discovery-url: https://keycloak.localhost/auth/realms/applications
+encryption-key: yrYUNvsPZLfwMMwMiROu6vpbOXhTKdB0
+
+scopes:
+  - httpbin
+
+# Turn on debug
+verbose: true
+
+enable-refresh-tokens: true
+
+listen: :80
+redirection-url: https://httpbin.localhost
+upstream-url: http://httpbin:80
+
+enable-default-deny: true
+
+# Use gatekeeper like kong, which handles all authentication
+# Whitelist everything required to show the landing page
+resources:
+- uri: /
+  methods:
+  - GET
+  white-listed: true
+- uri: /flasgger_static/*
+  methods:
+  - GET
+  white-listed: true
+- uri: /spec.json
+  methods:
+  - GET
+  white-listed: true
