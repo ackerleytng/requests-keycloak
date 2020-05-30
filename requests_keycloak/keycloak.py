@@ -12,12 +12,12 @@ KEYCLOAK_TO_CHECK = dict(
 )
 
 
-def is_keycloak_login_page(response: requests.Response) -> bool:
-    """Given a requests.Response, returns True if it (heuristically) is a keycloak
-    login page, or False otherwise
+def is_keycloak_login_url(url: str) -> bool:
+    """Given a url, returns True if it (heuristically) is keycloak's login page, or
+    False otherwise
     """
 
-    u = urlparse(response.url)
+    u = urlparse(url)
     qs = parse_qs(u.query)
 
     parsed = dict(
