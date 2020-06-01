@@ -24,24 +24,7 @@ USERNAME_ENVVAR = "AUTOLOGIN_USERNAME"
 PASSWORD_ENVVAR = "AUTOLOGIN_PASSWORD"
 
 
-# We can't subclass PreparedRequest and return it in __call__ below because of
-#   the way __call__ is used
-
-# In PreparedRequest.prepare_auth, they call auth(), and then update the
-#   results of the returned instance into the original, which means the type of
-#   the instance that is used does not change
-
-# Hence we monkeypatch copy to do a special check and change the
-#   PreparedRequest's method if it matches is_keycloak_login_url. This is
-#   necessary because __call__ is not applied for redirects
-
-# To select a method to hook, we look carefully at the implementation of
-#   resolve_redirects in SessionRedirectMixin. The target of the redirect is
-#   only set in the PreparedRequest after the copy
-
-# As long as KeycloakAuth is imported at all, we want to monkeypatch
-#   SessionRedirectMixin.rebuild_method
-
+# Monkeypatching: See design.md
 _orig_rebuild_method = SessionRedirectMixin.rebuild_method
 def _new_rebuild_method(self, prepared_request, response):
     _orig_rebuild_method(self, prepared_request, response)
