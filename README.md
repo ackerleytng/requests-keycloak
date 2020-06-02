@@ -8,6 +8,11 @@ requests-keycloak is intended as a stopgap replacement for the use of API keys,
 where the API keys are meant to both authenticate and provide authorization in
 the OAuth world.
 
+> This project, as is, does not correctly "replay" the original request to the
+>   OAuth 2.0 client, the POST data from the original request is lost. After
+>   digging into it a bit more, I found that this isn't the solution that I
+>   want. See explanation on [stackoverflow](https://stackoverflow.com/questions/62099346/how-should-i-implement-an-auth-handler-that-takes-effect-on-response/62143474).
+
 ## Usage
 
 Without requests-keycloak, you would have done
